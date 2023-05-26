@@ -1,0 +1,145 @@
+<div class="container-flex" >
+  <button type="button" class="btn btn-primary b" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Add Student
+  </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Enter Student details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearForm()"></button>
+      </div>
+      <form [formGroup]="studentForm" (ngSubmit)="addStudentDetails()">
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group">
+            <label for="studentName">Student Name</label>
+            <input type="text" class="form-control" id="studentName" aria-describedby="errmsg" placeholder="Enter Student Name" formControlName="studentName"
+            [class.is-invalid]="studentForm.get('studentName')?.invalid && studentForm.get('studentName')?.touched">
+            <small id="errmsg" class="text-danger" *ngIf="studentForm.get('studentName')?.errors?.required && studentForm.get('studentName')?.touched">Student name is required</small>
+          </div>
+          <div class="form-group">
+            <label for="studentName">Course</label>
+            <input type="text" class="form-control" id="course" aria-describedby="errmsg" placeholder="Enter course" formControlName="course"
+            [class.is-invalid]="studentForm.get('course')?.invalid && studentForm.get('course')?.touched">
+            <small id="errmsg" class="text-danger" *ngIf="studentForm.get('course')?.errors?.required && studentForm.get('course')?.touched">course is required</small>
+          </div>
+          <div class="form-group">
+            <label for="studentName">Specialization</label>
+            <input type="text" class="form-control" id="specialization" aria-describedby="errmsg" placeholder="Enter specialization" formControlName="specialization"
+            [class.is-invalid]="studentForm.get('specialization')?.invalid && studentForm.get('specialization')?.touched">
+            <small id="errmsg" class="text-danger" *ngIf="studentForm.get('specialization')?.errors?.required && studentForm.get('specialization')?.touched">specialization is required</small>
+          </div>
+          <div class="form-group">
+            <label for="studentName">Percentage</label>
+            <input type="text" class="form-control" id="percentage" aria-describedby="errmsg" placeholder="Enter percentage" formControlName="percentage"
+            [class.is-invalid]="studentForm.get('percentage')?.invalid && studentForm.get('percentage')?.touched">
+            <small id="errmsg" class="text-danger" *ngIf="studentForm.get('percentage')?.errors?.required && studentForm.get('percentage')?.touched">percentage is required</small>
+          </div>
+          <div class="form-group">
+            <label for="departmentId">Department</label>
+            <select id="departmentId" class="form-control" formControlName="departmentId" >
+              <option *ngFor="let dept of deparmentList" [value]="dept.departmentId" >{{ dept.departmentName }}</option>
+             </select>
+         </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearForm()">Close</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="studentForm.invalid">Add</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for edit-->
+<div class="modal fade" id="staticBackdropedit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Enter Student details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearForm()"></button>
+      </div>
+      <form [formGroup]="studentForm" (ngSubmit)="editStudentDetails()">
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group">
+            <label for="studentName">Student Name</label>
+            <input type="text" class="form-control" id="studentName" aria-describedby="errmsg" placeholder="Enter Student Name" formControlName="studentName"
+            [class.is-invalid]="studentForm.get('studentName')?.invalid && studentForm.get('studentName')?.touched">
+            <small id="errmsg" class="text-danger" *ngIf="studentForm.get('studentName')?.errors?.required && studentForm.get('studentName')?.touched">Student name is required</small>
+          </div>
+          <div class="form-group">
+            <label for="studentName">Course</label>
+            <input type="text" class="form-control" id="course" aria-describedby="errmsg" placeholder="Enter course" formControlName="course"
+            [class.is-invalid]="studentForm.get('course')?.invalid && studentForm.get('course')?.touched">
+            <small id="errmsg" class="text-danger" *ngIf="studentForm.get('course')?.errors?.required && studentForm.get('course')?.touched">course is required</small>
+          </div>
+          <div class="form-group">
+            <label for="studentName">Specialization</label>
+            <input type="text" class="form-control" id="specialization" aria-describedby="errmsg" placeholder="Enter specialization" formControlName="specialization"
+            [class.is-invalid]="studentForm.get('specialization')?.invalid && studentForm.get('specialization')?.touched">
+            <small id="errmsg" class="text-danger" *ngIf="studentForm.get('specialization')?.errors?.required && studentForm.get('specialization')?.touched">specialization is required</small>
+          </div>
+          <div class="form-group">
+            <label for="studentName">Percentage</label>
+            <input type="text" class="form-control" id="percentage" aria-describedby="errmsg" placeholder="Enter percentage" formControlName="percentage"
+            [class.is-invalid]="studentForm.get('percentage')?.invalid && studentForm.get('percentage')?.touched">
+            <small id="errmsg" class="text-danger" *ngIf="studentForm.get('percentage')?.errors?.required && studentForm.get('percentage')?.touched">percentage is required</small>
+            <small id="errmsg" class="text-danger" *ngIf="studentForm.get('percentage')?.errors?.pattern && studentForm.get('percentage')?.touched">percentage should be in numbers</small>
+          </div>
+          <div class="form-group">
+            <label for="departmentId">Department</label>
+            <select id="departmentId" class="form-control" formControlName="departmentId" >
+              <option *ngFor="let dept of deparmentList" [value]="dept.departmentId" >{{ dept.departmentName }}</option>
+             </select>
+         </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearForm()">Close</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="studentForm.invalid">Edit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid">
+  <table class="table">
+    <thead class="table-light">
+      <tr>
+        <th>Student ID</th>
+        <th>Student Name</th>
+        <th>Course</th>
+        <th>Specialization</th>
+        <th>Percentage</th>
+        <th>Department ID</th>
+        <th></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of studentsDetails">
+        <td>{{item.studentId}}</td>
+        <td>{{item.studentName}}</td>
+        <td>{{item.course}}</td>
+        <td>{{item.specialization}}</td>
+        <td>{{item.percentage}}</td>
+        <td>{{item.departmentId}}</td>
+        <td>
+          <div class="button-group">
+          <button type="button"  class="btn btn-warning space " (click)="onEdit(item.studentId)" data-bs-toggle="modal" data-bs-target="#staticBackdropedit" >Edit</button>
+          <button type="button" class="btn btn-danger space" (click)="onDelete($event,item.studentId)">delete</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>

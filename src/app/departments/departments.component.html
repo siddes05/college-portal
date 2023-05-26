@@ -1,0 +1,93 @@
+<div class="container-flex" >
+  <button type="button" class="btn btn-primary b" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Add department
+  </button>
+</div>
+<!-- Button trigger modal -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Enter Department details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearForm()"></button>
+      </div>
+      <form [formGroup]="departmentForm" (ngSubmit)="addDepartmentDetails()">
+      <div class="modal-body">
+        <div class="row">
+        <div class="input-group input-group-sm mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Department Name</span>
+          <input type="text" id="departmantName" class="form-control" [class.is-invalid]="departmentForm.get('departmentName')?.invalid && departmentForm.get('departmentName')?.touched"
+           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" formControlName="departmentName" />
+        </div>
+        <div class="mb-3">
+        <span class="text-danger" *ngIf="departmentForm.get('departmentName')?.errors?.required && departmentForm.get('departmentName')?.touched">department name is required</span>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearForm()">Close</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="departmentForm.invalid">Add</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal  for edit form-->
+<div class="modal fade" id="staticBackdropedit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Department details</h5>
+        <button type="button" class="btn-close"  data-bs-dismiss="modal" aria-label="Close" (click)="clearForm()"></button>
+      </div>
+      <form [formGroup]="departmentForm" (ngSubmit)="editDepartmentDetails()">
+      <div class="modal-body">
+        <div class="row">
+        <div class="input-group input-group-sm mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Department Name</span>
+          <input type="text" id="departmantName" class="form-control" [class.is-invalid]="departmentForm.get('departmentName')?.invalid && departmentForm.get('departmentName')?.touched"
+           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" formControlName="departmentName" />
+        </div>
+        <div class="mb-3">
+        <span class="text-danger" *ngIf="departmentForm.get('departmentName')?.errors?.required && departmentForm.get('departmentName')?.touched">department name is required</span>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearForm()">Close</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="departmentForm.invalid">Edit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+<table class="table">
+  <thead class="table-light">
+    <tr>
+      <th>Department ID</th>
+      <th>Department Name</th>
+      <th></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of departmentDetails">
+      <td>{{item.departmentId}}</td>
+      <td>{{item.departmentName}}</td>
+      <td>
+        <div class="button-group">
+        <button type="button"  class="btn btn-warning space " (click)="onEdit(item.departmentId)" data-bs-toggle="modal" data-bs-target="#staticBackdropedit" >Edit</button>
+        <button type="button" class="btn btn-danger space" (click)="onDelete($event,item.departmentId)">delete</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
