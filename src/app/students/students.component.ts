@@ -36,13 +36,14 @@ export class StudentsComponent implements OnInit {
   }
 
   showPopup(message:string) {
+   
     Swal.fire({
       position: 'center',
       icon: 'success',
       title: `${message}`,
       showConfirmButton: false,
       timer: 1500
-    })
+    });
   }
   
   getStudentsDetails(){

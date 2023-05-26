@@ -34,13 +34,14 @@ export class DepartmentsComponent implements OnInit {
 
 
   showPopup(message:string) {
+   
     Swal.fire({
       position: 'center',
       icon: 'success',
       title: `${message}`,
       showConfirmButton: false,
-      timer: 1500
-    })
+      timer: 15000
+    });
   }
 
   getDepartmentDetails()
@@ -66,7 +67,7 @@ export class DepartmentsComponent implements OnInit {
       this.departmentService.deleteDepartmentDetails(id).subscribe((res)=>{
         window.setTimeout(() => this.getDepartmentDetails(), 100);
       });
-      this.showPopup('deleted successfully');
+     this.showPopup('deleted successfully');
   }
 
 
@@ -84,7 +85,7 @@ export class DepartmentsComponent implements OnInit {
         departmentName: ''
       });
      
-      this.showPopup('added successfully');
+     this.showPopup('added successfully');
     }
   }
 
@@ -102,7 +103,7 @@ export class DepartmentsComponent implements OnInit {
         departmentId: '0',
         departmentName: ''
       });
-      this.showPopup('edited successfully');
+     this.showPopup('edited successfully');
     }
   }
 
